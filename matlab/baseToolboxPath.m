@@ -6,4 +6,4 @@ function path = baseToolboxPath;
 
 HOME = getenv('HOME');
 dirSep = filesep;
-path = {[HOME dirSep 'mlprojects' dirSep]};
+path = {[HOME dirSep 'lawrennd' dirSep]};
