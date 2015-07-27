@@ -21,6 +21,7 @@ counter = 0;
 for i = 1:length(basepathList)
   toolboxHere = false;
   basepath = basepathList{i};
+  disp(basepath)
   if exist([basepath toolBoxName dirSep 'matlab']) == 7
     % internal project one of Neil's.
     baseToolBox = [basepath toolBoxName dirSep 'matlab'];
@@ -29,6 +30,10 @@ for i = 1:length(basepathList)
   elseif exist([basepath 'matlab' dirSep toolBoxName]) == 7
     % someone else's code.
     baseToolBox = [basepath 'matlab' dirSep toolBoxName];
+    toolboxHere = true;
+    toolboxFound = true;
+  elseif exist([basepath dirSep toolBoxName]) == 7
+    baseToolBox = [basepath dirSep toolBoxName];
     toolboxHere = true;
     toolboxFound = true;
   end
@@ -66,8 +71,8 @@ if toolboxFound
                [upper(toolBoxName) '(?<first>[0-9]*)p(?<last>[0-9]*)'], ...
                'names');
     if (length(m)>0 && ~isoctave) || ~isempty(m.first)
-    counter = counter + 1;
-    versions(counter) = str2num([m.first '.' m.last]);
+      counter = counter + 1;
+      versions(counter) = str2num([m.first '.' m.last]);
     end
   end
   if counter == 0

@@ -37,7 +37,12 @@ for k = 1:length(baseToolboxList)
       % someone else's code.
       baseToolBox = [basepath 'matlab' dirSep toolBoxName{i}];
       toolboxFound = true;
+    elseif exist([basepath dirSep toolBoxName{i}]) == 7
+      baseToolBox = [basepath dirSep toolBoxName{i}];
+      toolboxFound = true;
     end
+  end
+  if toolboxFound
     if nargin < 2 || isempty(version{i})
       if ~any(findstr(baseToolBox, path));
         pathToAdd = [baseToolBox dirSep];
@@ -49,15 +54,14 @@ for k = 1:length(baseToolboxList)
       if ~any(findstr(toolBoxPath, path));
         pathToAdd = [toolBoxPath dirSep];
       end
-    
     end
-  end  
-end
+  end
+end  
 if toolboxFound
   if ~isempty(pathToAdd);
     disp(['Adding ' pathToAdd]);
     %addpath(pathToAdd);
-    path(pathToAdd, path);
+    path(genpath(pathToAdd), path);
     disp(['Added.']);
   end
 else

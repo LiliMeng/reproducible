@@ -13,7 +13,7 @@ end
 dirSep = filesep;
 baseToolboxList = baseToolboxPath;
 for j = 1:length(baseToolboxList)
-for k = 1:length(baseToolboxList)
+  for k = 1:length(baseToolboxList)
     basepath = baseToolboxList{j};
     for i = 1:length(toolBoxName)
       if exist([basepath toolBoxName{i} dirSep 'matlab']) == 7
@@ -36,5 +36,5 @@ for k = 1:length(baseToolboxList)
       end
       rmpath(pathToRemove);
     end
-end
+  end
 end
